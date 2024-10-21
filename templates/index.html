@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registros</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/estilo.css')}}">
+</head>
+<body>
+    <h1>Pagina de registros</h1>
+    
+    <br>
+    <a href="{{url_for('nuevo')}}" class="button">Nuevo</a>
+    <br>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Turno</th>
+            <th>Seminarios</th>
+            <td></td>
+            <td></td>
+        </tr>
+        {% for item in registros %}
+        <tr>
+            <td>{{item.id}}</td>
+            <td>{{item.fecha}}</td>
+            <td>{{item.nombre}}</td>
+            <td>{{item.apellidos}}</td>
+            <td>{{item.turno}}</td>
+            <td>
+                <ul>
+                    {% for seminario in item.seminarios %}
+                        <li>{{ seminario }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <a href="{{url_for('editar',id=item.id)}}" class="edit-link">Editar</a>
+            </td>
+            <td>
+                <form action="{{url_for('eliminar',id=item.id)}}" method="post">
+                    <input type="submit" value="Eliminar" class="delete-button">
+                </form>
+            </td>
+            
+        </tr>
+        {% endfor %}
+    </table>
+    
+</body>
+</html>

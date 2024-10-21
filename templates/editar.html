@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='CSS/estilon.css')}}"> 
+</head>
+<body>
+    <h1>Editar Registros</h1>
+    <br>
+    <form action="{{url_for('editar', id=registro.id)}}" method="post">
+        <div class="container">
+            <div class="card">
+                <h2>Datos</h2>
+                fecha: <input type="text" name="fecha" value="{{registro['fecha']}}"><br>
+                Nombre: <input type="text" name="nombre" value="{{registro['nombre']}}"><br>
+                Apellidos: <input type="text" name="apellidos" value="{{registro['apellidos']}}"><br>
+                <label>Turno:</label><br>
+                <input type="radio" name="turno" value="Mañana" {% if registro['turno'] == 'Mañana' %}checked{% endif %}> Mañana<br>
+                <input type="radio" name="turno" value="Tarde" {% if registro['turno'] == 'Tarde' %}checked{% endif %}> Tarde<br>
+                <input type="radio" name="turno" value="Noche" {% if registro['turno'] == 'Noche' %}checked{% endif %}> Noche<br>
+            </div>
+
+            <div class="card">
+                <h2>Seminarios Disponibles</h2>
+                <label>Seminarios:</label><br>
+                <input type="checkbox" name="seminarios" value="Inteligencia Artificial" {% if 'Inteligencia Artificial' in registro['seminarios'] %}checked{% endif %}> Inteligencia Artificial <br>
+                <input type="checkbox" name="seminarios" value="Machine Learning" {% if 'Machine Learning' in registro['seminarios'] %}checked{% endif %}> Machine Learning <br>
+                <input type="checkbox" name="seminarios" value="Simulacion con Arena" {% if 'Simulacion con Arena' in registro['seminarios'] %}checked{% endif %}> Simulación con Arena <br>
+                <input type="checkbox" name="seminarios" value="Robotica Educativa" {% if 'Robotica Educativa' in registro['seminarios'] %}checked{% endif %}> Robótica Educativa <br>
+            </div>
+        </div>
+
+        <input type="submit" value="Enviar Registros">
+    </form>
+    <br>
+</body>
+</html>
